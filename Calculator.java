@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Calculator {
@@ -7,11 +8,31 @@ public class Calculator {
         System.out.println("Welcome to the Simple Calculator!");
 
         while (true) {
-            System.out.print("Enter the first number: ");
-            double num1 = scanner.nextDouble();
+            double num1 = 0, num2 = 0;
+            boolean validInput = false;
 
-            System.out.print("Enter the second number: ");
-            double num2 = scanner.nextDouble();
+            while (!validInput) {
+                try {
+                    System.out.print("Enter the first number: ");
+                    num1 = scanner.nextDouble();
+                    validInput = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a valid number.");
+                    scanner.next(); // Clear the invalid input
+                }
+            }
+
+            validInput = false;
+            while (!validInput) {
+                try {
+                    System.out.print("Enter the second number: ");
+                    num2 = scanner.nextDouble();
+                    validInput = true;
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a valid number.");
+                    scanner.next(); // Clear the invalid input
+                }
+            }
 
             System.out.println("Select an operation:");
             System.out.println("1. Addition");
@@ -61,6 +82,6 @@ public class Calculator {
         }
 
         scanner.close();
-        System.out.println("Goodbye!");
+        System.out.println("Calculator closed.");
     }
 }
